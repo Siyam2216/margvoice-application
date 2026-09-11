@@ -527,6 +527,12 @@
         </div>
 
         <div class="field">
+          <label for="whatsapp">WhatsApp number <span class="hint">(with country code)</span></label>
+          <input type="text" id="whatsapp" name="whatsapp" required placeholder="+8801XXXXXXXXX">
+          <div class="error-msg">Please enter your WhatsApp number.</div>
+        </div>
+
+        <div class="field">
           <label for="country">Country</label>
           <input type="text" id="country" name="country" required>
           <div class="error-msg">Please enter your country.</div>
@@ -796,7 +802,7 @@
   function validate(){
     let valid = true;
 
-    ['fullName','dob','email','country'].forEach(id => {
+    ['fullName','dob','email','whatsapp','country'].forEach(id => {
       const el = document.getElementById(id);
       const ok = el.value.trim() !== '' && (id !== 'email' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value));
       showFieldError(el, !ok);
@@ -849,6 +855,7 @@
       teamLeader: document.getElementById('teamLeader').value.trim(),
       dob: dobFormatted,
       email: document.getElementById('email').value.trim(),
+      whatsapp: document.getElementById('whatsapp').value.trim(),
       country: document.getElementById('country').value.trim(),
       gender: form.querySelector('input[name="gender"]:checked').value,
       language: Array.from(form.querySelectorAll('input[name="language"]:checked'))
