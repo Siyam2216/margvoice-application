@@ -521,8 +521,14 @@
         </div>
 
         <div class="field">
-          <label for="email">Email <span class="hint">that you've created now for this project</span></label>
-          <input type="email" id="email" name="email" required placeholder="you@example.com">
+          <label for="email1">Email 1 <span class="hint">that you've created now for this project</span></label>
+          <input type="email" id="email1" name="email1" required placeholder="you@example.com">
+          <div class="error-msg">Please enter a valid email address.</div>
+        </div>
+
+        <div class="field">
+          <label for="email2">Email 2 <span class="hint">a second email for this project</span></label>
+          <input type="email" id="email2" name="email2" required placeholder="you2@example.com">
           <div class="error-msg">Please enter a valid email address.</div>
         </div>
 
@@ -802,9 +808,10 @@
   function validate(){
     let valid = true;
 
-    ['fullName','dob','email','whatsapp','country'].forEach(id => {
+    ['fullName','dob','email1','email2','whatsapp','country'].forEach(id => {
       const el = document.getElementById(id);
-      const ok = el.value.trim() !== '' && (id !== 'email' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value));
+      const isEmail = (id === 'email1' || id === 'email2');
+      const ok = el.value.trim() !== '' && (!isEmail || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value));
       showFieldError(el, !ok);
       if(!ok) valid = false;
     });
@@ -854,7 +861,8 @@
       fullName: document.getElementById('fullName').value.trim(),
       teamLeader: document.getElementById('teamLeader').value.trim(),
       dob: dobFormatted,
-      email: document.getElementById('email').value.trim(),
+      email1: document.getElementById('email1').value.trim(),
+      email2: document.getElementById('email2').value.trim(),
       whatsapp: document.getElementById('whatsapp').value.trim(),
       country: document.getElementById('country').value.trim(),
       gender: form.querySelector('input[name="gender"]:checked').value,
